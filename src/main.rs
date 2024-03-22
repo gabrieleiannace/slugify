@@ -1,12 +1,21 @@
 
 
-use clap::Parser;
+use clap::{arg, Parser};
 
 /// Slugify program from Exercise 1
 #[derive(Parser, Debug)]
 struct Args {
     //The input string
-    slug_in: String,
+    #[arg(short, long, value_delimiter = ' ')]
+    slug_in: Vec<String>,
+
+    //Number of main's iteration
+    #[arg(short, long, default_value_t = 1)]
+    repeat: isize,
+
+    //Print as much as possible
+    #[arg(short, long)]
+    verbose: bool,
 }
 
 
@@ -56,7 +65,13 @@ fn conv(c: char) -> char {
 
 fn main() {
     let args = Args::parse();
-    slugify(args.slug_in.as_str());
+
+    for _ in 0..args.repeat.clone(){
+        for string in args.slug_in.clone(){
+            slugify(string.as_str());
+        }
+    }
+
 }
 
 #[cfg(test)]
