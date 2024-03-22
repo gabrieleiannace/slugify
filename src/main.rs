@@ -161,4 +161,4 @@ mod tests {
         let valor = "string";
         assert_eq!(valor, slugify("string{{{"))
     }
-}
+}//test
